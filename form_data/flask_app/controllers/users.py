@@ -13,8 +13,13 @@ def users():
 
 @app.route('/create/user',methods=['POST'])
 def create_user():
-    
-    pass
+    print(request.form)
+    User.save(request.form)
+    msg = {
+        "user_name":request.form["user_name"],
+        "email":request.form["email"]
+    }
+    return jsonify(msg)
 
 
 

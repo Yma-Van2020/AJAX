@@ -21,3 +21,27 @@ function getUsers(){
 }
 getUsers();
 
+var myForm = document.getElementById("myForm");
+myForm.onsubmit = function(e){
+
+    e.preventDefault();
+
+    var form = new FormData(myForm)
+
+    fetch("http://localhost:5000/create/user", {method:"POST" , body: form})
+    .then(res => res.json())
+    .then(data => {
+        var users = document.getElementById('users');
+        let row = document.createElement('tr');
+
+                let name = document.createElement('td');
+                name.innerHTML = data.user_name;
+                row.appendChild(name);
+                
+                let email = document.createElement('td');
+                email.innerHTML = data.email;
+                row.appendChild(email);
+                users.appendChild(row);
+    })
+}
+
